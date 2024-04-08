@@ -14,7 +14,7 @@ export const createCategory = async (req: any, res: any) => {
         }
         
         if (userFinded.role !== constants.SU_ADMIN_USER_ROLE) {
-            myLogger.error(constants.USER_WITHOUT_PERMISSION + userFinded.email);
+            myLogger.error(constants.USER_WITHOUT_PERMISSION +' '+ userFinded.email);
             return res.status(500).json(constants.USER_WITHOUT_PERMISSION);
         }
 
@@ -22,7 +22,7 @@ export const createCategory = async (req: any, res: any) => {
         if (!!categoryFinded) return res.status(500).json(constants.CATEGORY_EXISTS);
         const newCategoryName = await categoryRepository.createCategory(name);
         myLogger.info(constants.CATEGORY_CREATED + newCategoryName);
-        res.json('My respuesta');
+        res.json(newCategoryName);
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
