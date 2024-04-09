@@ -23,7 +23,7 @@ const TOKEN_EXPIRATION_TIME = '4h';
 const INTERNAL_SERVER_ERROR = 'Error interno del servidor.';
 const UNKNOWN_ERROR = 'Error desconocido, comuníquese con el administrador.';
 const PROCESS_ERROR = 'Error al procesar la solicitud: ';
-const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+const PRODUCT_CREATED = 'Se ha creado el producto: ';
 const TIME_ZONE = 'America/Bogota';
 const MILLISECONDS_OFFSET = 60000;
 
@@ -53,7 +53,7 @@ export const constants = {
     INTERNAL_SERVER_ERROR,
     UNKNOWN_ERROR,
     PROCESS_ERROR,
-    DATE_FORMAT,
+    PRODUCT_CREATED,
     TIME_ZONE,
     MILLISECONDS_OFFSET
 }

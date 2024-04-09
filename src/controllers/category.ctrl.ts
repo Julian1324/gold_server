@@ -8,6 +8,7 @@ export const createCategory = async (req: any, res: any) => {
         const { name } = req.body;
         const { id } = req.token;
         const userFinded = await getUser(id);
+        
         if(!userFinded) {
             myLogger.error(constants.USER_DOESNT_EXIST);
             return res.status(500).json(constants.USER_DOESNT_EXIST)
@@ -23,6 +24,15 @@ export const createCategory = async (req: any, res: any) => {
         const newCategoryName = await categoryRepository.createCategory(name);
         myLogger.info(constants.CATEGORY_CREATED + newCategoryName);
         res.json(newCategoryName);
+    } catch (error) {
+        myLogger.error(constants.PROCESS_ERROR + error);
+        throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
+    }
+}
+
+export const getCategories = async (req: any, res: any) => {
+    try {
+        res.json(await categoryRepository.getCategories());
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);

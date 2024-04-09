@@ -6,5 +6,6 @@ const router = Router();
 router.use(express.json());
 
 router.post(`/category`, authMiddleware, categoryCtrl.createCategory);
+router.get(`/categories`, categoryCtrl.getCategories);
 
 export { router };

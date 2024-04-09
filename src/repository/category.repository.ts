@@ -7,3 +7,8 @@ export const createCategory = async (nameNewCategory: string) => {
 };
 
 export const categoryExists = async (name: string) => await CategoryModel.findOne({ name });
+
+export const getCategories = async () => {
+    const categories = await CategoryModel.find();
+    return categories.map((category) => { return { id: category.id, name: category.name } });
+}
