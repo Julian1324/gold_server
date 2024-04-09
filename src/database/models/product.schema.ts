@@ -1,5 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document, PaginateModel } from "mongoose";
 import { localeDate } from "../../helpers/timeZoneHandler";
+import paginate from 'mongoose-paginate-v2';
 
 const ProductSchema = new Schema(
     {
@@ -28,5 +29,9 @@ const ProductSchema = new Schema(
     { timestamps: { currentTime: () => localeDate() } }
 );
 
-const ProductModel = model("products", ProductSchema);
+ProductSchema.plugin(paginate);
+interface ProductDocument extends Document {
+    id: string, category_id: Schema.Types.ObjectId, name: string, description: string, price: number
+}
+const ProductModel = model<ProductDocument, PaginateModel<ProductDocument>>('products', ProductSchema, 'products');
 export default ProductModel;

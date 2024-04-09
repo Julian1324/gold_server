@@ -9,6 +9,17 @@ export const createProduct = async (newProduct: any) => {
     return { id, name, description, price };
 }
 
-export const updateProduct = async (query: any,updatedProduct: any) => {
-    await ProductModel.updateOne({query},{ $set: { updatedProduct } })
+export const updateProduct = async (query: any, updatedProduct: any) => {
+    await ProductModel.updateOne({ query }, { $set: { updatedProduct } })
 };
+
+export const getProductsPage = async (page: number, category_id: any) => {
+    const options = {
+        page,
+        limit: 8,
+        sort: { createdAt: -1 }
+    }
+
+    const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options);
+    return productsPaginated;
+}

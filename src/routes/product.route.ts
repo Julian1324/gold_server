@@ -6,5 +6,6 @@ const router = Router();
 router.use(express.json());
 
 router.post(`/product`, authMiddleware, productCtrl.createProduct);
+router.get(`/productsByCategory`, productCtrl.getProductsByCategory);
 
 export { router };

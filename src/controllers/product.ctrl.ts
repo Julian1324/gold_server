@@ -26,3 +26,14 @@ export const createProduct = async (req: any, res: any) => {
         throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
     }
 }
+
+export const getProductsByCategory = async (req: any, res: any) => {
+    try {
+        const { category_id } = req.query;
+        const productsPaginated = await productRepository.getProductsPage(1, category_id);
+        res.json(productsPaginated);
+    } catch (error) {
+        myLogger.error(constants.PROCESS_ERROR + error);
+        throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
+    }
+}

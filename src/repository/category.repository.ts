@@ -10,5 +10,5 @@ export const categoryExists = async (name: string) => await CategoryModel.findOn
 
 export const getCategories = async () => {
     const categories = await CategoryModel.find();
-    return categories.map((category) => { return { id: category.id, name: category.name } });
+    return categories.map((category) => { return { _id: category._id, name: category.name } });
 }
