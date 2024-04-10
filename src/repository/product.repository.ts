@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import ProductModel from "../database/models/product.schema";
 import * as uuid from 'uuid';
+import { constants } from "../context/constants";
 
 export const createProduct = async (newProduct: any) => {
     newProduct.id = uuid.v1();
@@ -16,10 +17,25 @@ export const updateProduct = async (query: any, updatedProduct: any) => {
 export const getProductsPage = async (page: number, category_id: any) => {
     const options = {
         page,
-        limit: 8,
-        sort: { createdAt: -1 }
+        limit: constants.DEFAULT_PAGES_PAGINATE,
+        sort: { createdAt: -1 },
     }
 
-    const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options);
+    const myFilter = (err: any, result: any) => {
+        if (!!err) return err;
+        return result.docs.reduce((acc: any, currentValue: any) => {
+            acc.push(
+                {
+                    _id: currentValue._id,
+                    category_id: currentValue.category_id,
+                    name: currentValue.name,
+                    price: currentValue.price
+                }
+            );
+            return acc;
+        }, []);
+    }
+
+    const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options, myFilter);
     return productsPaginated;
 }

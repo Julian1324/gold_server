@@ -33,5 +33,5 @@ ProductSchema.plugin(paginate);
 interface ProductDocument extends Document {
     id: string, category_id: Schema.Types.ObjectId, name: string, description: string, price: number
 }
-const ProductModel = model<ProductDocument, PaginateModel<ProductDocument>>('products', ProductSchema, 'products');
+const ProductModel = model<ProductDocument, PaginateModel<ProductDocument>>('Products', ProductSchema, 'products');
 export default ProductModel;

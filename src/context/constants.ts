@@ -24,6 +24,7 @@ const INTERNAL_SERVER_ERROR = 'Error interno del servidor.';
 const UNKNOWN_ERROR = 'Error desconocido, comuníquese con el administrador.';
 const PROCESS_ERROR = 'Error al procesar la solicitud: ';
 const PRODUCT_CREATED = 'Se ha creado el producto: ';
+const DEFAULT_PAGES_PAGINATE = 8;
 const TIME_ZONE = 'America/Bogota';
 const MILLISECONDS_OFFSET = 60000;
 
@@ -54,6 +55,7 @@ export const constants = {
     UNKNOWN_ERROR,
     PROCESS_ERROR,
     PRODUCT_CREATED,
+    DEFAULT_PAGES_PAGINATE,
     TIME_ZONE,
     MILLISECONDS_OFFSET
 }
