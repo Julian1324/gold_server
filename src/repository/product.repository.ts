@@ -6,8 +6,8 @@ import { constants } from "../context/constants";
 export const createProduct = async (newProduct: any) => {
     newProduct.id = uuid.v1();
     newProduct.category_id = new Types.ObjectId(newProduct.category_id);
-    const { id, name, description, price } = await ProductModel.create(newProduct);
-    return { id, name, description, price };
+    const { id, name, description, price, discount, status } = await ProductModel.create(newProduct);
+    return { id, name, description, price, discount, status };
 }
 
 export const updateProduct = async (query: any, updatedProduct: any) => {
@@ -23,17 +23,21 @@ export const getProductsPage = async (page: number, category_id: any) => {
 
     const myFilter = (err: any, result: any) => {
         if (!!err) return err;
-        return result.docs.reduce((acc: any, currentValue: any) => {
+        result.docs = result.docs.reduce((acc: any, currentValue: any) => {
             acc.push(
                 {
                     _id: currentValue._id,
                     category_id: currentValue.category_id,
                     name: currentValue.name,
-                    price: currentValue.price
+                    description: currentValue.description,
+                    price: currentValue.price,
+                    discount: currentValue.discount,
+                    status: currentValue.status
                 }
             );
             return acc;
         }, []);
+        return result;
     }
 
     const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options, myFilter);
