@@ -28,6 +28,10 @@ const ProductSchema = new Schema(
             type: Number,
             required: false
         },
+        quantity:{
+            type: Number,
+            required: true
+        },
         status: {
             type: String,
             required: true

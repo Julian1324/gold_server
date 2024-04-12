@@ -32,6 +32,7 @@ export const getProductsPage = async (page: number, category_id: any) => {
                     description: currentValue.description,
                     price: currentValue.price,
                     discount: currentValue.discount,
+                    quantity: currentValue.quantity,
                     status: currentValue.status
                 }
             );

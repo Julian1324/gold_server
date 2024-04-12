@@ -10,9 +10,9 @@ const CLIENT_USER_ROLE = 'client';
 // const ADMIN_USER_ROLE = 'admin'; Todavía no se ha definido el rol de administrador
 const SU_ADMIN_USER_ROLE = 'superadmin';
 const USER_DEFAULT_ROLE = CLIENT_USER_ROLE;
-const USER_ACTIVE_STATUS = 'active';
-const USER_INACTIVE_STATUS = 'inactive';
-const USER_DEFAULT_STATUS = USER_ACTIVE_STATUS;
+const ACTIVE_STATUS = 'active';
+const INACTIVE_STATUS = 'inactive';
+const USER_DEFAULT_STATUS = ACTIVE_STATUS;
 const USER_SIGNED_IN = 'Ingreso de: ';
 const USER_WITHOUT_PERMISSION = 'No tienes permisos para realizar esta acción.';
 const CATEGORY_CREATED = 'Se ha creado la categoría: ';
@@ -41,8 +41,8 @@ export const constants = {
     // ADMIN_USER_ROLE,
     SU_ADMIN_USER_ROLE,
     USER_DEFAULT_ROLE,
-    USER_ACTIVE_STATUS,
-    USER_INACTIVE_STATUS,
+    ACTIVE_STATUS,
+    INACTIVE_STATUS,
     USER_DEFAULT_STATUS,
     USER_SIGNED_IN,
     USER_WITHOUT_PERMISSION,
