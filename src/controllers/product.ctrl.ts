@@ -40,8 +40,9 @@ export const getProductsByCategory = async (req: any, res: any) => {
 
 export const getProductByID = async (req: any, res: any) => {
     try {
-        console.log(req);
-        res.json('myProduct');
+        const { product } = req.query;
+        const { quantity } = await productRepository.getProduct(product);
+        res.json(quantity);
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);

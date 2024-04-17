@@ -44,3 +44,5 @@ export const getProductsPage = async (page: number, category_id: any) => {
     const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options, myFilter);
     return productsPaginated;
 }
+
+export const getProduct = async (_id: string) => await ProductModel.findOne({ _id: new Types.ObjectId(_id) });
