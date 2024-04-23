@@ -27,6 +27,17 @@ export const createProduct = async (req: any, res: any) => {
     }
 }
 
+export const getAllProducts = async (req: any, res: any) => {
+    try {
+        const { page } = req.query;
+        console.log(page);
+        res.json('Todo melo caramelo en la página '+page);
+    } catch (error) {
+        myLogger.error(constants.PROCESS_ERROR + error);
+        throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
+    }
+}
+
 export const getProductsByCategory = async (req: any, res: any) => {
     try {
         const { page, category_id } = req.query;
