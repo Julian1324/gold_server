@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 import ProductModel from "../database/models/product.schema";
 import * as uuid from 'uuid';
 import { constants } from "../context/constants";
+import { myProductsFilter } from "../helpers/filtersHandler";
 
 export const createProduct = async (newProduct: any) => {
     newProduct.id = uuid.v1();
@@ -21,28 +22,19 @@ export const getProductsPage = async (page: number, category_id: any) => {
         sort: { createdAt: -1 },
     }
 
-    const myFilter = (err: any, result: any) => {
-        if (!!err) return err;
-        result.docs = result.docs.reduce((acc: any, currentValue: any) => {
-            acc.push(
-                {
-                    _id: currentValue._id,
-                    category_id: currentValue.category_id,
-                    name: currentValue.name,
-                    description: currentValue.description,
-                    price: currentValue.price,
-                    discount: currentValue.discount,
-                    quantity: currentValue.quantity,
-                    status: currentValue.status
-                }
-            );
-            return acc;
-        }, []);
-        return result;
-    }
-
-    const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options, myFilter);
+    const productsPaginated = await ProductModel.paginate({ category_id: new Types.ObjectId(category_id) }, options, myProductsFilter);
     return productsPaginated;
 }
 
 export const getProduct = async (_id: string) => await ProductModel.findOne({ _id: new Types.ObjectId(_id) });
+
+export const getAllProductsPage = async (page: number) => {
+    const options = {
+        page,
+        limit: constants.DEFAULT_PAGES_PAGINATE,
+        sort: { createdAt: -1 },
+    }
+
+    const productsPaginated = await ProductModel.paginate({}, options, myProductsFilter);
+    return productsPaginated;
+}
