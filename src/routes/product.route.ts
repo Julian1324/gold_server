@@ -9,5 +9,6 @@ router.post(`/product`, authMiddleware, productCtrl.createProduct);
 router.get(`/productsByCategory`, productCtrl.getProductsByCategory);
 router.get(`/product`, productCtrl.getProductByID);
 router.get(`/products`, productCtrl.getAllProducts);
+router.post(`/cartProducts`, productCtrl.getCartProducts);
 
 export { router };

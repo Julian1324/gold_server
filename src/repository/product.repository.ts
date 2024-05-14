@@ -38,3 +38,5 @@ export const getAllProductsPage = async (page: number) => {
     const productsPaginated = await ProductModel.paginate({}, options, myProductsFilter);
     return productsPaginated;
 }
+
+export const getCartProducts = async (items: any) => await ProductModel.find({ _id: { $in: items.map((item: any) => item._id) } });

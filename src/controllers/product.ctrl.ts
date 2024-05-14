@@ -59,3 +59,14 @@ export const getProductByID = async (req: any, res: any) => {
         throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
     }
 }
+
+export const getCartProducts = async (req: any, res: any) => {
+    try {
+        const { items } = req.body;
+        const products = await productRepository.getCartProducts(items);
+        res.json(products);
+    } catch (error) {
+        myLogger.error(constants.PROCESS_ERROR + error);
+        throw res.status(500).json(constants.INTERNAL_SERVER_ERROR);
+    }
+}
