@@ -23,6 +23,7 @@ const UserSchema = new Schema(
             type: String,
             required: true
         },
+        cart : Array(),
         status: { type: String }
     },
     { timestamps: { currentTime: () => localeDate() } }

@@ -10,5 +10,7 @@ router.post(`/user/signin`, userCtrl.signIn);
 router.get(`/user`, authMiddleware, userCtrl.getUser);
 router.post(`/user`, authMiddleware, userCtrl.setUser);
 router.post(`/userPassword`, authMiddleware, userCtrl.setPassword);
+router.post(`/setCart`, authMiddleware, userCtrl.setCart);
+router.post(`/purchaseItems`, authMiddleware, userCtrl.purchaseSummary);
 
 export { router };

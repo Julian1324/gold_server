@@ -16,6 +16,8 @@ export const setUser = async (id: string, name: string, email: string) => await 
     { id }, { $set: { name, email } }
 );
 
+export const setUserCart = async (id: string, cart: any) => await UserModel.updateOne({ id }, { $set: { cart } });
+
 export const setPassword = async (id: string, newPassword: string) => await UserModel.updateOne(
     { id }, { $set: { password: newPassword } }
 );

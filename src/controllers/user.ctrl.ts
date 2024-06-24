@@ -91,3 +91,35 @@ export const setPassword = async (req: any, res: any) => {
         return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
     }
 }
+
+export const setCart = async (req: any, res: any) => {
+
+    try {
+        const { newCart } = req.body;
+        const { id } = req.token;
+        const response = await userRepository.setUserCart(id, newCart);
+        if (!response.modifiedCount) {
+            myLogger.error(constants.CART_ERROR);
+            res.status(500).json(constants.CART_ERROR);
+        }
+        res.json(response);
+    } catch (error) {
+        myLogger.error(constants.PROCESS_ERROR + error);
+        return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
+    }
+}
+
+export const purchaseSummary = async (req: any, res: any) => {
+    try {
+        const userFinded = await userRepository.getUser(req.token.id);
+        if (!userFinded) {
+            myLogger.error(constants.USER_DOESNT_EXIST);
+            return res.status(500).json(constants.USER_DOESNT_EXIST);
+        }
+        const cartPrice = userFinded.cart; // Pendiente cartprice
+        res.json({ 'userFinded': userFinded });
+    } catch (error) {
+        myLogger.error(constants.PROCESS_ERROR + error);
+        return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
+    }
+}

@@ -19,6 +19,7 @@ const CATEGORY_CREATED = 'Se ha creado la categoría: ';
 const CATEGORY_EXISTS = 'La categoría ya existe, intenta con otra.';
 const INCORRECT_CREDENTIALS = 'Los datos de ingreso no son correctos.';
 const TOKEN_ERROR = 'Error creando token: ';
+const CART_ERROR = 'Error al modificar carrito.';
 const TOKEN_EXPIRATION_TIME = '4h';
 const INTERNAL_SERVER_ERROR = 'Error interno del servidor.';
 const UNKNOWN_ERROR = 'Error desconocido, comuníquese con el administrador.';
@@ -50,6 +51,7 @@ export const constants = {
     CATEGORY_EXISTS,
     INCORRECT_CREDENTIALS,
     TOKEN_ERROR,
+    CART_ERROR,
     TOKEN_EXPIRATION_TIME,
     INTERNAL_SERVER_ERROR,
     UNKNOWN_ERROR,
