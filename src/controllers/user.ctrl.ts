@@ -116,8 +116,14 @@ export const purchaseSummary = async (req: any, res: any) => {
             myLogger.error(constants.USER_DOESNT_EXIST);
             return res.status(500).json(constants.USER_DOESNT_EXIST);
         }
-        const cartPrice = userFinded.cart; // Pendiente cartprice
-        res.json({ 'userFinded': userFinded });
+        const { total } = userFinded.cart.reduce((acc, item) => {
+            const theDiscount = item.discount || 0;
+            return {
+                ...acc,
+                total: (acc.total || 0) + (item.price * item.quantityToBuy) - (item.price * item.quantityToBuy * theDiscount / 100)
+            };
+        }, {});
+        res.json({ total });
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
