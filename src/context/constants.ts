@@ -6,6 +6,7 @@ const USER_MODIFIED = 'Usuario actualizado con éxito.';
 const USER_SIGNED_UP = 'Se ha creado el usuario: ';
 const USER_WRONGPASS = 'La contraseña actual es incorrecta.';
 const USER_PASSCHANGED = 'La contraseña se ha actualizado exitosamente';
+const USER_INS_BALANCE = 'Saldo insuficiente';
 const CLIENT_USER_ROLE = 'client';
 // const ADMIN_USER_ROLE = 'admin'; Todavía no se ha definido el rol de administrador
 const SU_ADMIN_USER_ROLE = 'superadmin';
@@ -38,6 +39,7 @@ export const constants = {
     USER_SIGNED_UP,
     USER_WRONGPASS,
     USER_PASSCHANGED,
+    USER_INS_BALANCE,
     CLIENT_USER_ROLE,
     // ADMIN_USER_ROLE,
     SU_ADMIN_USER_ROLE,

@@ -37,7 +37,7 @@ export const signIn = async ({ body }: any, res: any) => {
         }
 
         const newToken = createToken({ id: userFinded.id });
-        res.json({ name: userFinded.name, token: newToken });
+        res.json({ name: userFinded.name, token: newToken, wallet: userFinded.wallet });
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
@@ -116,14 +116,24 @@ export const purchaseSummary = async (req: any, res: any) => {
             myLogger.error(constants.USER_DOESNT_EXIST);
             return res.status(500).json(constants.USER_DOESNT_EXIST);
         }
-        const { total } = userFinded.cart.reduce((acc, item) => {
+
+        const cartProducts: any = await userRepository.getCartProducts(userFinded.cart);
+
+        const { total } = cartProducts.reduce((acc: any, item: any) => {
             const theDiscount = item.discount || 0;
             return {
                 ...acc,
                 total: (acc.total || 0) + (item.price * item.quantityToBuy) - (item.price * item.quantityToBuy * theDiscount / 100)
             };
         }, {});
-        res.json({ total });
+        if (userFinded.wallet > total) {
+            const totalResponse = userFinded.wallet - total;
+            await userRepository.updateUserWallet(userFinded._id, totalResponse);
+            res.json({ wallet: totalResponse });
+        } else {
+            myLogger.error(constants.USER_INS_BALANCE + ': ' + userFinded._id);
+            return res.status(500).json(constants.USER_INS_BALANCE);
+        }
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
