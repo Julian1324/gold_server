@@ -51,7 +51,15 @@ export const getUser = async (req: any, res: any) => {
             myLogger.error(constants.USER_DOESNT_EXIST);
             return res.status(500).json(constants.USER_DOESNT_EXIST);
         }
-        res.status(200).json({ name: userFinded.name, email: userFinded.email });
+
+        const userCart = await userRepository.getCartProducts(userFinded.cart);
+        
+        res.status(200).json({
+            name: userFinded.name,
+            email: userFinded.email,
+            cart: userCart,
+            wallet: userFinded.wallet,
+        });
     } catch (error) {
         myLogger.error(constants.PROCESS_ERROR + error);
         return res.status(500).json(constants.INTERNAL_SERVER_ERROR);
